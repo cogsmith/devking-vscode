@@ -1,7 +1,7 @@
 {
   "name": "devking-vscode",
   "description": "DEVKING-VSCODE",
-  "version": "0.0.1",
+  "version": "0.0.2-dev",
   "repository": "https://github.com/cogsmith/devking-vscode",
   "engines": {
     "vscode": "^1.32.0"
