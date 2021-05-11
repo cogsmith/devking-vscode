@@ -1,5 +1,109 @@
 {
-  "dependencies": {
-    "@cogsmith/xt": "^1.0.155"
-  }
+	"name": "devking-vscode",
+	"description": "DEVKING-VSCODE",
+	"version": "0.0.1",
+	"repository": "https://github.com/cogsmith/devking-vscode",
+	"engines": {
+		"vscode": "^1.32.0"
+	},
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "DEVKING.PUSHDEV",
+				"title": "DEVKING.PUSHDEV"
+			},
+			{
+				"command": "DEVKING.PUSHTAG",
+				"title": "DEVKING.PUSHTAG"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "DEVKING.PUSHDEV",
+				"key": "ctrl+alt+shift+F1"
+			},
+			{
+				"command": "DEVKING.PUSHTAG",
+				"key": "ctrl+alt+shift+F2"
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "SIDEBAR",
+					"title": "DEVKING",
+					"icon": "media/icon.png"
+				}
+			],
+			"panel": [
+				{
+					"id": "PANEL",
+					"title": "DEVKING",
+					"icon": "media/icon.png"
+				}
+			]
+		},
+		"views": {
+			"scm": [
+				{
+					"id": "DEVKING",
+					"name": "DEVKING",
+					"visibility": "visible"
+				}
+			],
+			"SIDEBAR": [
+				{
+					"id": "DEVKING_INFOVIEW",
+					"name": "DEVKING_INFOVIEW",
+					"visibility": "visible"
+				},
+				{
+					"id": "DEVKING_LINKVIEW",
+					"name": "DEVKING_LINKVIEW",
+					"visibility": "visible"
+				},
+				{
+					"id": "DEVKING_TREEVIEW",
+					"name": "DEVKING_TREEVIEW",
+					"visibility": "visible"
+				}
+			],
+			"PANEL": [
+				{
+					"id": "DEVKING_PANELVIEW",
+					"name": "DEVKING_PANELVIEW",
+					"visibility": "visible"
+				}
+			]
+		},
+		"viewsWelcome": [
+			{
+				"view": "DEVKING_INFOVIEW",
+				"contents": "DEVKING PANEL VIEW\n[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n"
+			},
+			{
+				"view": "DEVKING",
+				"contents": "DEVKING PANEL VIEW\n[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n"
+			},
+			{
+				"view": "DEVKING_LINKVIEW",
+				"contents": "... PLEASE WAIT EXTENSION LOADING ..."
+			},
+			{
+				"view": "DEVKING_TREEVIEW",
+				"contents": "... PLEASE WAIT EXTENSION LOADING ..."
+			}
+		]
+	},
+	"scripts": {},
+	"devDependencies": {
+		"@types/vscode": "^1.32.0"
+	},
+	"dependencies": {
+		"@cogsmith/xt": "^1.0.148"
+	}
 }
