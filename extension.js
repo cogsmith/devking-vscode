@@ -113,7 +113,6 @@ activate = function (context) {
 				progress.report({ increment: 98, message: cmdout });
 
 				DEVKINGLOG('CMDOUT: ' + cmdout);
-				vscode.window.showInformationMessage('PUSHDEV: ' + cmdout);
 			}
 		);
 	});
@@ -138,7 +137,6 @@ activate = function (context) {
 				progress.report({ increment: 98, message: cmdout });
 
 				DEVKINGLOG('CMDOUT: ' + cmdout);
-				vscode.window.showInformationMessage('PUSHTAG: ' + cmdout);
 			}
 		);
 	});
@@ -186,7 +184,7 @@ activate = function (context) {
 		}
 	}
 
-	vscode.window.registerTreeDataProvider('DEVKING_TREEVIEW', new myTreeDataProvider());
+	//vscode.window.registerTreeDataProvider('DEVKING_TREEVIEW', new myTreeDataProvider());
 
 	//
 
@@ -202,8 +200,9 @@ activate = function (context) {
 		LINKS[id] = link;
 	}
 
-	AddLink('XT_DEMO', { URL: 'http://xtdemo.cogsmith.com', Icon: 'star' });
-	AddLink('BACKEND', { URL: 'http://localhost:31337/', Icon: 'gear' });
+	AddLink('XT-DEMO', { URL: 'http://xtdemo.cogsmith.com', Icon: 'star' });
+	//AddLink('BACKEND', { URL: 'http://localhost:31337/', Icon: 'gear' });
+	AddLink('DEVKING-VSCODE', { URL: 'https://marketplace.visualstudio.com/items?itemName=COGSMITH.devking-vscode', Icon: 'gear' });
 	AddLink('WIKIPEDIA', { URL: 'https://en.wikipedia.org/wiki/Visual_Studio_Code' });
 
 	const TREEDATA_LINKVIEW = {};
