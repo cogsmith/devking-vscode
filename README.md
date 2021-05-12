@@ -1,4 +1,5 @@
 # 👑 VS Code Dev Helpers 👑
+## Visual Studio Code Extension
 
 ---
 
