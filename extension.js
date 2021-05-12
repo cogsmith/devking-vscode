@@ -107,11 +107,11 @@ activate = function (context) {
 				let cmd = 'git pull ; git commit -a -m "DEV" ; git push';
 				DEVKINGLOG(cwd); DEVKINGLOG(cmd);
 
-				const t = new vscode.Task({ type: 'shell' }, vscode.TaskScope.Global, 'PUSHTAG', 'test', new vscode.ShellExecution(cmd, { cwd }), []);
+				const t = new vscode.Task({ type: 'shell' }, vscode.TaskScope.Global, 'PUSHDEV', 'test', new vscode.ShellExecution(cmd, { cwd }), []);
 
 				progress.report({ increment: 1, message: cmd });
 				await vscode.tasks.executeTask(t);
-				await WAIT(2500);
+				await WAIT(999);
 				progress.report({ increment: 98, message: cmdout });
 			}
 		);
@@ -121,22 +121,20 @@ activate = function (context) {
 	const CMD_PUSHTAG = vscode.commands.registerCommand('DEVKING.PUSHTAG', async () => {
 		let DT = new Date().toISOString();
 
-		DEVKINGLOG(); DEVKINGLOG('PUSHTAG @' + DT);
+		DEVKINGLOG(); DEVKINGLOG('PUSHTAG @ ' + DT);
 
-		vscode.window.withProgress({ title: 'PUSHTAG', location: vscode.ProgressLocation.Window },
+		vscode.window.withProgress({ title: 'PUSHDEV', location: vscode.ProgressLocation.Window },
 			async progress => {
-				// Progress is shown while this function runs.
-				// It can also return a promise which is then awaited
+				let cwd = GetWorkspaceFolder(); if (!cwd && fs.existsSync(EXTDEVDIR)) { cwd = EXTDEVDIR; }
+				let cmd = 'git pull ; git commit -a -m "DEV" ; git commit --allow-empty -m "TAG" && git push';
+				DEVKINGLOG(cwd); DEVKINGLOG(cmd);
 
-				cmd = 'CD /D "' + GetWorkspaceFolder() + '" && git pull && git commit -a -m "DEV" && git commit --allow-empty -m "TAG" && git push';
-				DEVKINGLOG(cmd);
+				const t = new vscode.Task({ type: 'shell' }, vscode.TaskScope.Global, 'PUSHTAG', 'test', new vscode.ShellExecution(cmd, { cwd }), []);
 
 				progress.report({ increment: 1, message: cmd });
-				let cmdout = false; try { cmdout = XT.EXECA.commandSync(cmd, { shell: true }).stdout; } catch (ex) { DEVKINGLOG(ex.message); }
-				// if (!cmdout) { await WAIT(2500); }
+				await vscode.tasks.executeTask(t);
+				await WAIT(999);
 				progress.report({ increment: 98, message: cmdout });
-
-				DEVKINGLOG('CMDOUT: ' + cmdout);
 			}
 		);
 	});
