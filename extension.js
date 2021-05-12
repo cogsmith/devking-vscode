@@ -12,6 +12,8 @@ App.Webviews = {};
 //
 
 activate = function (context) {
+	vscode.window.showInformationMessage('ACTIVATE');
+
 	console.log('ACTIVATE-INIT');
 	LOG.WARN('ACTIVATE-INIT');
 
