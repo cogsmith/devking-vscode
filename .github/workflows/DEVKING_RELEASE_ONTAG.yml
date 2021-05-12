@@ -15,4 +15,3 @@ jobs:
       - uses: cogsmith/devking-release@main
         env:
           VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
-          ACTION_DEVKING_RELEASE_ONTAG: 1          
