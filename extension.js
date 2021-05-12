@@ -109,7 +109,7 @@ activate = function (context) {
 				DEVKINGLOG(cmd);
 
 				progress.report({ increment: 1, message: cmd });
-				let cmdout = false; try { XT.EXECA.commandSync(cmd, { shell: true }).stdout; } catch (ex) { DEVKINGLOG(ex.message); }
+				let cmdout = false; try { cmdout = XT.EXECA.commandSync(cmd, { shell: true }).stdout; } catch (ex) { DEVKINGLOG(ex.message); }
 				// if (!cmdout) { await WAIT(2500); }
 				progress.report({ increment: 98, message: cmdout });
 
@@ -132,7 +132,7 @@ activate = function (context) {
 				DEVKINGLOG(cmd);
 
 				progress.report({ increment: 1, message: cmd });
-				let cmdout = false; try { XT.EXECA.commandSync(cmd, { shell: true }).stdout; } catch (ex) { DEVKINGLOG(ex.message); }
+				let cmdout = false; try { cmdout = XT.EXECA.commandSync(cmd, { shell: true }).stdout; } catch (ex) { DEVKINGLOG(ex.message); }
 				// if (!cmdout) { await WAIT(2500); }
 				progress.report({ increment: 98, message: cmdout });
 
