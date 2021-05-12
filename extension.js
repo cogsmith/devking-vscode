@@ -111,6 +111,7 @@ activate = function (context) {
 
 				progress.report({ increment: 1, message: cmd });
 				await vscode.tasks.executeTask(t);
+				await WAIT(2500);
 				progress.report({ increment: 98, message: cmdout });
 			}
 		);
