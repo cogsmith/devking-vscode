@@ -102,8 +102,7 @@ activate = function (context) {
 
 		vscode.window.withProgress({ title: 'PUSHDEV', location: vscode.ProgressLocation.Window },
 			async progress => {
-				// Progress is shown while this function runs.
-				// It can also return a promise which is then awaited
+				// Progress is shown while this function runs -- It can also return a promise which is then awaited
 
 				cmd = 'CD /D "' + GetWorkspaceFolder() + '" && git pull && git commit -a -m "DEV" && git push';
 				DEVKINGLOG(cmd);
