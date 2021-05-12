@@ -109,5 +109,5 @@
   "dependencies": {
     "@cogsmith/xt": "*"
   },
-  "versiontaglast": "0.0.3"
+  "versiontaglast": "0.0.4"
 }
