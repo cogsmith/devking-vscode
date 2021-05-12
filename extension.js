@@ -2,6 +2,10 @@ const vscode = require('vscode');
 
 //
 
+const fs = require('fs');
+
+//
+
 const XT = require('@cogsmith/xt').Init();
 const App = XT.App; const LOG = XT.LOG;
 
@@ -9,18 +13,28 @@ LOG.WARN('XT');
 
 App.Webviews = {};
 
+const JSONFANCY = function (x) { return require('util').inspect(x, { colors: false, depth: null, breakLength: 1 }); };
+
 //
 
 activate = function (context) {
-	vscode.window.showInformationMessage('ACTIVATE');
+	//Object.keys(process.env).forEach(z => { console.log(z + '=' + process.env[z]); });
 
-	console.log('ACTIVATE-INIT');
-	LOG.WARN('ACTIVATE-INIT');
+	let devkingpath = 'W:\\DEV\\CODE\\DEVKING-VSCODE';
+	if (fs.existsSync(devkingpath)) { process.cwd(devkingpath); }
 
-	console.log(LOG);
-	console.log(LOG.WARN);
+	let DEVKINGLOGCHAN = vscode.window.createOutputChannel('DEVKING');
+	DEVKINGLOGCHAN.show();
 
-	require('http').createServer((req, res) => { res.writeHead(200); res.end('DEVKING-VSCODE' + "\n" + req.url); console.log(req.url); }).listen(31337, '0.0.0.0');
+	let DEVKINGLOG = function (msg) {
+		if (typeof (msg) == 'object') { msg = JSONFANCY(msg); }
+		if (!msg) { msg = ""; }
+		DEVKINGLOGCHAN.appendLine(msg);
+	}
+
+	DEVKINGLOG('DEVKING.Activate');
+
+	//require('http').createServer((req, res) => { res.writeHead(200); res.end('DEVKING-VSCODE' + "\n" + req.url); console.log(req.url); }).listen(31337, '0.0.0.0');
 
 	//
 
@@ -30,7 +44,7 @@ activate = function (context) {
 		vscode.window.showErrorMessage('ERROR');
 		const input = await vscode.window.showInputBox();
 		vscode.window.showInformationMessage(input);
-		console.log(input);
+		DEVKINGLOG(input);
 	});
 	context.subscriptions.push(CMD_SHOWMSGS);
 
@@ -49,7 +63,7 @@ activate = function (context) {
 	//
 
 	const CMD_IFRAME = vscode.commands.registerCommand('DEVKING.IFRAME', async (url, title) => {
-		console.log('IFRAME: ' + url);
+		DEVKINGLOG('IFRAME: ' + url);
 		let panel = vscode.window.createWebviewPanel('IFRAME', title || url, vscode.ViewColumn.Active, { enableScripts: true });
 		panel.webview.html = "<html><head><style>html,body,iframe { background-color:white;border:0px;margin:0px;padding:0px;width:100%;height:100% }</style></head><body><iframe src='" + url + "'></iframe></body></html>";
 	});
@@ -59,37 +73,73 @@ activate = function (context) {
 
 	const CMD_EXECA = vscode.commands.registerCommand('DEVKING.EXECA', async (cmd) => {
 		vscode.window.showInformationMessage('CMD_EXECA: ' + cmd);
-		console.log('#');
-		console.log('CMD_EXECA: ' + cmd);
-		let cmdout = XT.EXECA.commandSync(cmd).stdout;
-		console.log(cmdout);
-		console.log('#');
+		DEVKINGLOG();
+		DEVKINGLOG('EXECA: ' + cmd);
+		let cmdout = XT.EXECA.commandSync(cmd, { shell: true }).stdout;
+		DEVKINGLOG('CMDOUT: ' + cmdout);
 		//XT.EXECA.command(cmd).stdout.pipe(process.stdout);
 	});
 	context.subscriptions.push(CMD_EXECA);
-	vscode.commands.executeCommand('DEVKING.EXECA', 'WHOAMI');
+	//vscode.commands.executeCommand('DEVKING.EXECA', 'WHOAMI');
 
 	//
 
+	const GetWorkspaceFolder = function () {
+		let path = false;
+		try { path = vscode.workspace.workspaceFolders[0].uri.path; } catch (ex) { DEVKINGLOG(ex.message); }
+		if (path && path.substr(0, 1) == '/') { path = path.substr(1); }
+		//vscode.window.showInformationMessage('WorkspaceFolder: ' + path);
+		DEVKINGLOG('WorkspaceFolder: ' + path);
+		return path;
+	}
+
+	WAIT = async function (ms) { return new Promise(resolve => { setTimeout(resolve, ms); }); }
+
+	let DT = new Date().toISOString();
+
 	const CMD_PUSHDEV = vscode.commands.registerCommand('DEVKING.PUSHDEV', async () => {
-		vscode.window.showInformationMessage('DEVKING.PUSHDEV');
-		console.log('#');
-		console.log('DEVKING.PUSHDEV');
-		cmd = "git pull ; git commit -a -m 'DEV' ; git push";
-		let cmdout = XT.EXECA.commandSync(cmd).stdout;
-		console.log(cmdout);
-		console.log('#');
+		DEVKINGLOG(); DEVKINGLOG('PUSHDEV @ ' + DT);
+
+		vscode.window.withProgress({ title: 'PUSHDEV', location: vscode.ProgressLocation.Window },
+			async progress => {
+				// Progress is shown while this function runs.
+				// It can also return a promise which is then awaited
+
+				cmd = 'CD /D "' + GetWorkspaceFolder() + '" && git pull && git commit -a -m "DEV" && git push';
+				DEVKINGLOG(cmd);
+
+				progress.report({ increment: 1, message: cmd });
+				let cmdout = false; try { XT.EXECA.commandSync(cmd, { shell: true }).stdout; } catch (ex) { DEVKINGLOG(ex.message); }
+				// if (!cmdout) { await WAIT(2500); }
+				progress.report({ increment: 98, message: cmdout });
+
+				DEVKINGLOG('CMDOUT: ' + cmdout);
+				vscode.window.showInformationMessage('PUSHDEV: ' + cmdout);
+			}
+		);
 	});
 	context.subscriptions.push(CMD_PUSHDEV);
 
 	const CMD_PUSHTAG = vscode.commands.registerCommand('DEVKING.PUSHTAG', async () => {
-		vscode.window.showInformationMessage('DEVKING.PUSHTAG');
-		console.log('#');
-		console.log('DEVKING.PUSHDEV');
-		cmd = "git pull ; git commit -a -m 'DEV' ; git commit --allow-empty -m 'TAG' ; git push";
-		let cmdout = XT.EXECA.commandSync(cmd).stdout;
-		console.log(cmdout);
-		console.log('#');
+		DEVKINGLOG(); DEVKINGLOG('PUSHTAG @' + DT);
+
+		vscode.window.withProgress({ title: 'PUSHTAG', location: vscode.ProgressLocation.Window },
+			async progress => {
+				// Progress is shown while this function runs.
+				// It can also return a promise which is then awaited
+
+				cmd = 'CD /D "' + GetWorkspaceFolder() + '" && git pull && git commit -a -m "DEV" && git commit --allow-empty -m "TAG" && git push';
+				DEVKINGLOG(cmd);
+
+				progress.report({ increment: 1, message: cmd });
+				let cmdout = false; try { XT.EXECA.commandSync(cmd, { shell: true }).stdout; } catch (ex) { DEVKINGLOG(ex.message); }
+				// if (!cmdout) { await WAIT(2500); }
+				progress.report({ increment: 98, message: cmdout });
+
+				DEVKINGLOG('CMDOUT: ' + cmdout);
+				vscode.window.showInformationMessage('PUSHTAG: ' + cmdout);
+			}
+		);
 	});
 	context.subscriptions.push(CMD_PUSHTAG);
 
@@ -105,14 +155,11 @@ activate = function (context) {
 
 	class myTreeDataProvider {
 		constructor() {
-			console.log('MyTreeDataProvider');
 			this.data = [];
 		}
 
 		getTreeItem(q) {
-			console.log({ GetTreeItem: q });
-
-			vscode.commands.executeCommand('DEVKING.EXECA', 'dir');
+			DEVKINGLOG({ GetTreeItem: q });
 
 			let cstate = vscode.TreeItemCollapsibleState.Collapsed;
 			let iconpath = new vscode.ThemeIcon('globe');
@@ -132,7 +179,7 @@ activate = function (context) {
 		}
 
 		getChildren(q) {
-			console.log({ GetChildren: q });
+			DEVKINGLOG({ GetChildren: q });
 			if (!q) { return ['CHILD1', 'CHILD2']; }
 			return ['NODE', 'LEAF'];
 		}
@@ -193,7 +240,7 @@ activate = function (context) {
 
 	//
 
-	console.log('ACTIVATE-DONE');
+	DEVKINGLOG('ACTIVATE-DONE');
 }
 
 deactivate = function () { }

@@ -5,7 +5,7 @@
 			"name": "Run Extension",
 			"type": "extensionHost",
 			"request": "launch",
-			"runtimeExecutable": "${execPath}",
+			"runtimeExecutable": "${workspaceFolder}",
 			"args": [
 				"--extensionDevelopmentPath=${workspaceFolder}"
 			]
