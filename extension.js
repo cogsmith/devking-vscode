@@ -95,9 +95,9 @@ activate = function (context) {
 
 	WAIT = async function (ms) { return new Promise(resolve => { setTimeout(resolve, ms); }); }
 
-	let DT = new Date().toISOString();
-
 	const CMD_PUSHDEV = vscode.commands.registerCommand('DEVKING.PUSHDEV', async () => {
+		let DT = new Date().toISOString();
+
 		DEVKINGLOG(); DEVKINGLOG('PUSHDEV @ ' + DT);
 
 		vscode.window.withProgress({ title: 'PUSHDEV', location: vscode.ProgressLocation.Window },
@@ -121,6 +121,8 @@ activate = function (context) {
 	context.subscriptions.push(CMD_PUSHDEV);
 
 	const CMD_PUSHTAG = vscode.commands.registerCommand('DEVKING.PUSHTAG', async () => {
+		let DT = new Date().toISOString();
+
 		DEVKINGLOG(); DEVKINGLOG('PUSHTAG @' + DT);
 
 		vscode.window.withProgress({ title: 'PUSHTAG', location: vscode.ProgressLocation.Window },
