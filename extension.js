@@ -105,7 +105,15 @@ activate = function (context) {
 				// Progress is shown while this function runs -- It can also return a promise which is then awaited
 
 				cmd = 'CD /D "' + GetWorkspaceFolder() + '" && git pull && git commit -a -m "DEV" && git push';
+				cmd = 'CD /D "W:\\DEV\\CODE\\DEVKING-VSCODE" ; git pull && git commit -a -m "DEV" && git push';
+				cmd = cmd.replace(/&&/g, ';');
 				DEVKINGLOG(cmd);
+
+				let cwd = "W:\\DEV\\CODE\\DEVKING-VSCODE";
+				//let cwd = GetWorkspaceFolder();
+
+				const t = new vscode.Task({ type: 'shell' }, vscode.TaskScope.Global, 'PUSHTAG', 'test', new vscode.ShellExecution(cmd, { cwd }), []);
+				await vscode.tasks.executeTask(t);
 
 				progress.report({ increment: 1, message: cmd });
 				let cmdout = false; try { cmdout = XT.EXECA.commandSync(cmd, { shell: true }).stdout; } catch (ex) { DEVKINGLOG(ex.message); }
