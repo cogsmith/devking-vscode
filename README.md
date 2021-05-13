@@ -1,4 +1,4 @@
-# 👑 VS Code Dev Helpers 👑
+# 👑 DEVKING: VS Code Dev Helpers 👑
 ## Custom Extension: Commands, Macros, WebView, Sidebar, Panel
 
 ---
