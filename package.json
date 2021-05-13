@@ -47,14 +47,14 @@
         {
           "id": "SIDEBAR",
           "title": "DEVKING",
-          "icon": "media/logo.png"
+          "icon": "media/cogsmith.png"
         }
       ],
       "panel": [
         {
           "id": "PANEL",
           "title": "DEVKING",
-          "icon": "media/logo.png"
+          "icon": "media/cogsmith.png"
         }
       ]
     },
@@ -94,7 +94,7 @@
     "viewsWelcome": [
       {
         "view": "DEVKING_INFOVIEW",
-        "contents": "DEVKING PANEL VIEW\n[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n"
+        "contents": "[PULL](command:DEVKING.PULL)\n[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n"
       },
       {
         "view": "DEVKING",
