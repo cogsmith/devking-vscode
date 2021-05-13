@@ -16,6 +16,10 @@
   "contributes": {
     "commands": [
       {
+        "command": "DEVKING.PULL",
+        "title": "DEVKING.PULL"
+      },
+      {
         "command": "DEVKING.PUSHDEV",
         "title": "DEVKING.PUSHDEV"
       },
@@ -26,12 +30,16 @@
     ],
     "keybindings": [
       {
+        "command": "DEVKING.PULL",
+        "key": "ctrl+alt+shift+F3"
+      },
+      {
         "command": "DEVKING.PUSHDEV",
-        "key": "ctrl+alt+shift+F1"
+        "key": "ctrl+alt+shift+F2"
       },
       {
         "command": "DEVKING.PUSHTAG",
-        "key": "ctrl+alt+shift+F2"
+        "key": "ctrl+alt+shift+F3"
       }
     ],
     "viewsContainers": {
@@ -90,7 +98,7 @@
       },
       {
         "view": "DEVKING",
-        "contents": "[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n"
+        "contents": "[PUSH](command:DEVKING.PULL)\n[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n"
       },
       {
         "view": "DEVKING_LINKVIEW",
@@ -108,6 +116,5 @@
   },
   "dependencies": {
     "@cogsmith/xt": "*"
-  },
-  "versiontaglast": "0.0.31"
+  }
 }

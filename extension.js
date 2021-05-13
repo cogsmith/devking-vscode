@@ -96,6 +96,28 @@ activate = function (context) {
 	WAIT = async function (ms) { return new Promise(resolve => { setTimeout(resolve, ms); }); }
 	let EXTDEVDIR = "W:\\DEV\\CODE\\DEVKING-VSCODE";
 
+	const CMD_PULL = vscode.commands.registerCommand('DEVKING.PULL', async () => {
+		let DT = new Date().toISOString();
+
+		DEVKINGLOG(); DEVKINGLOG('PULL @ ' + DT);
+
+		vscode.window.withProgress({ title: 'PULL', location: vscode.ProgressLocation.Window },
+			async progress => {
+				let cwd = GetWorkspaceFolder(); if (!cwd && fs.existsSync(EXTDEVDIR)) { cwd = EXTDEVDIR; }
+				let cmd = 'git pull';
+				DEVKINGLOG(cwd); DEVKINGLOG(cmd);
+
+				const t = new vscode.Task({ type: 'shell' }, vscode.TaskScope.Global, 'PULL', 'test', new vscode.ShellExecution(cmd, { cwd }), []);
+
+				progress.report({ increment: 1, message: cmd });
+				await vscode.tasks.executeTask(t);
+				await WAIT(999);
+				progress.report({ increment: 98, message: cmdout });
+			}
+		);
+	});
+	context.subscriptions.push(CMD_PULL);
+
 	const CMD_PUSHDEV = vscode.commands.registerCommand('DEVKING.PUSHDEV', async () => {
 		let DT = new Date().toISOString();
 
@@ -126,7 +148,7 @@ activate = function (context) {
 		vscode.window.withProgress({ title: 'PUSHDEV', location: vscode.ProgressLocation.Window },
 			async progress => {
 				let cwd = GetWorkspaceFolder(); if (!cwd && fs.existsSync(EXTDEVDIR)) { cwd = EXTDEVDIR; }
-				let cmd = 'git pull ; git commit -a -m "DEV" ; git commit --allow-empty -m "TAG" && git push';
+				let cmd = 'git pull ; git commit -a -m "DEV" ; git commit --allow-empty -m "TAG" ; git push';
 				DEVKINGLOG(cwd); DEVKINGLOG(cmd);
 
 				const t = new vscode.Task({ type: 'shell' }, vscode.TaskScope.Global, 'PUSHTAG', 'test', new vscode.ShellExecution(cmd, { cwd }), []);
