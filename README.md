@@ -1,5 +1,5 @@
 # 👑 VS Code Dev Helpers 👑
-## Visual Studio Code Edevking-vscodeension: Commands, Macros, WebView, Sidebar, Panel
+## Visual Studio Code Extensions: Commands, Macros, WebView, Sidebar, Panel
 
 ---
 
