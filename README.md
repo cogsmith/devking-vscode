@@ -1,5 +1,5 @@
 # 👑 VS Code Dev Helpers 👑
-## Visual Studio Code Extensions: Commands, Macros, WebView, Sidebar, Panel
+## Custom Extension: Commands, Macros, WebView, Sidebar, Panel
 
 ---
 
