@@ -47,14 +47,14 @@
         {
           "id": "SIDEBAR",
           "title": "DEVKING",
-          "icon": "media/icon.png"
+          "icon": "media/logo.png"
         }
       ],
       "panel": [
         {
           "id": "PANEL",
           "title": "DEVKING",
-          "icon": "media/icon.png"
+          "icon": "media/logo.png"
         }
       ]
     },
@@ -98,7 +98,7 @@
       },
       {
         "view": "DEVKING",
-        "contents": "[PUSH](command:DEVKING.PULL)\n[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n"
+        "contents": "[PULL](command:DEVKING.PULL)\n[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n"
       },
       {
         "view": "DEVKING_LINKVIEW",
