@@ -94,11 +94,11 @@
     "viewsWelcome": [
       {
         "view": "DEVKING_INFOVIEW",
-        "contents": "[PULL](command:DEVKING.PULL)\n[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n"
+        "contents": "[PULL](command:DEVKING.PULL)\n[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n \n"
       },
       {
         "view": "DEVKING",
-        "contents": "[PULL](command:DEVKING.PULL)\n[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n"
+        "contents": "[PULL](command:DEVKING.PULL)\n[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n \n"
       },
       {
         "view": "DEVKING_LINKVIEW",
