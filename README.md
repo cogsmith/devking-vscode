@@ -9,7 +9,7 @@
 
 #### <code><a href='https://marketplace.visualstudio.com/items?itemName=COGSMITH.devking-vscode'>🏬 [VISUAL STUDIO MARKETPLACE]</a></code>
 
-#### <code><a href='https://github.com/cogsmith/devking-vscode/blob/main/index.js'>🧾 [VIEW LIB SOURCE CODE]</a></code>
+#### <code><a href='https://github.com/cogsmith/devking-vscode/blob/main/extension.js'>🧾 [VIEW EXTENSION SOURCE CODE]</a></code>
 
 #### <code><a href='https://github.com/cogsmith/devking-vscode/projects/1'>📅 [PROJECT TRACKER BOARD]</a></code>
 
