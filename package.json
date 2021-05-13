@@ -47,14 +47,14 @@
         {
           "id": "SIDEBAR",
           "title": "DEVKING",
-          "icon": "media/cogsmith.png"
+          "icon": "media/logooutline.png"
         }
       ],
       "panel": [
         {
           "id": "PANEL",
           "title": "DEVKING",
-          "icon": "media/cogsmith.png"
+          "icon": "media/logooutline.png"
         }
       ]
     },
