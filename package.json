@@ -69,17 +69,17 @@
       "SIDEBAR": [
         {
           "id": "DEVKING_INFOVIEW",
-          "name": "DEVKING_INFOVIEW",
+          "name": "INFO",
           "visibility": "visible"
         },
         {
           "id": "DEVKING_LINKVIEW",
-          "name": "DEVKING_LINKVIEW",
+          "name": "LINKS",
           "visibility": "visible"
         },
         {
           "id": "DEVKING_TREEVIEW",
-          "name": "DEVKING_TREEVIEW",
+          "name": "DATA",
           "visibility": "hidden"
         }
       ],

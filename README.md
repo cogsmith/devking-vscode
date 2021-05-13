@@ -17,7 +17,6 @@
 
 [![](https://shields.io/github/package-json/v/cogsmith/devking-vscode?label=codebase)](http://github.com/cogsmith/devking-vscode)
 [![](https://shields.io/github/last-commit/cogsmith/devking-vscode)](https://github.com/cogsmith/devking-vscode/commits/main)
-[![](https://github.com/cogsmith/devking-vscode/actions/workflows/DEVKING_CHECK.yml/badge.svg)](https://github.com/cogsmith/devking-vscode/actions/workflows/DEVKING_CHECK.yml)
 
 [![](https://shields.io/github/v/release/cogsmith/devking-vscode?label=latest+release)](https://github.com/cogsmith/devking-vscode/releases)
 [![](https://shields.io/github/release-date/cogsmith/devking-vscode?color=blue)](https://github.com/cogsmith/devking-vscode/releases)
