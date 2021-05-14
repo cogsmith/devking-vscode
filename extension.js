@@ -4,13 +4,15 @@ const fs = require('fs');
 //
 
 const XT = require('@cogsmith/xt').Init();
-const App = XT.App; const LOG = XT.LOG;
+const App = XT.App; let LOG = XT.LOG;
 
 LOG.WARN('XT');
 
 App.Webviews = {};
 
 const JSONFANCY = function (x) { return require('util').inspect(x, { colors: false, depth: null, breakLength: 1 }); };
+
+const DT = function () { return new Date().toISOString().substr(0, 19).replace('T', '|'); }
 
 //
 
@@ -26,10 +28,11 @@ activate = function (context) {
 	let DEVKINGLOG = function (msg) {
 		if (typeof (msg) == 'object') { msg = JSONFANCY(msg); }
 		if (!msg) { msg = ""; }
+		msg = '[' + DT() + '] ' + msg;
 		DEVKINGLOGCHAN.appendLine(msg);
 	}
 
-	DEVKINGLOG('DEVKING.Activate');
+	LOG = DEVKINGLOG;
 
 	//require('http').createServer((req, res) => { res.writeHead(200); res.end('DEVKING-VSCODE' + "\n" + req.url); console.log(req.url); }).listen(31337, '0.0.0.0');
 
@@ -41,7 +44,7 @@ activate = function (context) {
 		vscode.window.showErrorMessage('ERROR');
 		const input = await vscode.window.showInputBox();
 		vscode.window.showInformationMessage(input);
-		DEVKINGLOG(input);
+		LOG(input);
 	});
 	context.subscriptions.push(CMD_SHOWMSGS);
 
@@ -60,7 +63,7 @@ activate = function (context) {
 	//
 
 	const CMD_IFRAME = vscode.commands.registerCommand('DEVKING.IFRAME', async (url, title) => {
-		DEVKINGLOG('IFRAME: ' + url);
+		LOG('IFRAME: ' + url);
 		let panel = vscode.window.createWebviewPanel('IFRAME', title || url, vscode.ViewColumn.Active, { enableScripts: true });
 		panel.webview.html = "<html><head><style>html,body,iframe { background-color:white;border:0px;margin:0px;padding:0px;width:100%;height:100% }</style></head><body><iframe src='" + url + "'></iframe></body></html>";
 	});
@@ -70,10 +73,10 @@ activate = function (context) {
 
 	const CMD_EXECA = vscode.commands.registerCommand('DEVKING.EXECA', async (cmd) => {
 		vscode.window.showInformationMessage('CMD_EXECA: ' + cmd);
-		DEVKINGLOG();
-		DEVKINGLOG('EXECA: ' + cmd);
+		LOG();
+		LOG('EXECA: ' + cmd);
 		let cmdout = XT.EXECA.commandSync(cmd, { shell: true }).stdout;
-		DEVKINGLOG('CMDOUT: ' + cmdout);
+		LOG('CMDOUT: ' + cmdout);
 		//XT.EXECA.command(cmd).stdout.pipe(process.stdout);
 	});
 	context.subscriptions.push(CMD_EXECA);
@@ -83,10 +86,10 @@ activate = function (context) {
 
 	const GetWorkspaceFolder = function () {
 		let path = false;
-		try { path = vscode.workspace.workspaceFolders[0].uri.path; } catch (ex) { DEVKINGLOG(ex.message); }
+		try { path = vscode.workspace.workspaceFolders[0].uri.path; } catch (ex) { LOG(ex.message); }
 		if (path && path.substr(0, 1) == '/') { path = path.substr(1); }
 		//vscode.window.showInformationMessage('WorkspaceFolder: ' + path);
-		DEVKINGLOG('WorkspaceFolder: ' + path);
+		LOG('WorkspaceFolder: ' + path);
 		return path;
 	}
 
@@ -96,13 +99,13 @@ activate = function (context) {
 	const CMD_PULL = vscode.commands.registerCommand('DEVKING.PULL', async () => {
 		let DT = new Date().toISOString();
 
-		DEVKINGLOG(); DEVKINGLOG('PULL @ ' + DT);
+		LOG(); LOG('PULL @ ' + DT);
 
 		vscode.window.withProgress({ title: 'PULL', location: vscode.ProgressLocation.Window },
 			async progress => {
 				let cwd = GetWorkspaceFolder(); if (!cwd && fs.existsSync(EXTDEVDIR)) { cwd = EXTDEVDIR; }
 				let cmd = 'git pull';
-				DEVKINGLOG(cwd); DEVKINGLOG(cmd);
+				LOG(cwd); LOG(cmd);
 
 				const t = new vscode.Task({ type: 'shell' }, vscode.TaskScope.Global, 'PULL', 'test', new vscode.ShellExecution(cmd, { cwd }), []);
 
@@ -118,13 +121,13 @@ activate = function (context) {
 	const CMD_PUSHDEV = vscode.commands.registerCommand('DEVKING.PUSHDEV', async () => {
 		let DT = new Date().toISOString();
 
-		DEVKINGLOG(); DEVKINGLOG('PUSHDEV @ ' + DT);
+		LOG(); LOG('PUSHDEV @ ' + DT);
 
 		vscode.window.withProgress({ title: 'PUSHDEV', location: vscode.ProgressLocation.Window },
 			async progress => {
 				let cwd = GetWorkspaceFolder(); if (!cwd && fs.existsSync(EXTDEVDIR)) { cwd = EXTDEVDIR; }
 				let cmd = 'git pull ; git commit -a -m "DEV" ; git push';
-				DEVKINGLOG(cwd); DEVKINGLOG(cmd);
+				LOG(cwd); LOG(cmd);
 
 				const t = new vscode.Task({ type: 'shell' }, vscode.TaskScope.Global, 'PUSHDEV', 'test', new vscode.ShellExecution(cmd, { cwd }), []);
 
@@ -140,13 +143,13 @@ activate = function (context) {
 	const CMD_PUSHTAG = vscode.commands.registerCommand('DEVKING.PUSHTAG', async () => {
 		let DT = new Date().toISOString();
 
-		DEVKINGLOG(); DEVKINGLOG('PUSHTAG @ ' + DT);
+		LOG(); LOG('PUSHTAG @ ' + DT);
 
 		vscode.window.withProgress({ title: 'PUSHDEV', location: vscode.ProgressLocation.Window },
 			async progress => {
 				let cwd = GetWorkspaceFolder(); if (!cwd && fs.existsSync(EXTDEVDIR)) { cwd = EXTDEVDIR; }
 				let cmd = 'git pull ; git commit -a -m "DEV" ; git commit --allow-empty -m "TAG" ; git push';
-				DEVKINGLOG(cwd); DEVKINGLOG(cmd);
+				LOG(cwd); LOG(cmd);
 
 				const t = new vscode.Task({ type: 'shell' }, vscode.TaskScope.Global, 'PUSHTAG', 'test', new vscode.ShellExecution(cmd, { cwd }), []);
 
@@ -175,7 +178,7 @@ activate = function (context) {
 		}
 
 		getTreeItem(q) {
-			DEVKINGLOG({ GetTreeItem: q });
+			LOG({ GetTreeItem: q });
 
 			let cstate = vscode.TreeItemCollapsibleState.Collapsed;
 			let iconpath = new vscode.ThemeIcon('globe');
@@ -195,7 +198,7 @@ activate = function (context) {
 		}
 
 		getChildren(q) {
-			DEVKINGLOG({ GetChildren: q });
+			LOG({ GetChildren: q });
 			if (!q) { return ['CHILD1', 'CHILD2']; }
 			return ['NODE', 'LEAF'];
 		}
@@ -257,7 +260,34 @@ activate = function (context) {
 
 	//
 
-	DEVKINGLOG('ACTIVATE-DONE');
+	vscode.workspace.onDidSaveTextDocument((document) => {
+		//let DOCFIELDS = 'uri fileName isUntitled languageId version isClosed isDirty notebook save getText eol lineCount lineAt offsetAt positionAt validateRange validatePosition getWordRangeAtPosition'.split(' ');
+		//DOCFIELDS.forEach(z => { LOG(z + ': ' + document[z]); });
+
+		/*
+		const edit = new vscode.WorkspaceEdit();
+		const res = [vscode.TextEdit.setEndOfLine(vscode.EndOfLine.LF)];
+		edit.set(document.uri, res)
+		vscode.workspace.applyEdit(edit);
+		*/
+	});
+
+	context.subscriptions.push(vscode.workspace.onWillSaveTextDocument(e => {
+		let doc = e.document;
+		let eol = doc.eol || vscode.EndOfLine.LF;
+		let eoltxt = eol == 1 ? 'LF' : 'CRLF';
+
+		const edit = vscode.TextEdit.setEndOfLine(eol);
+		e.waitUntil(Promise.resolve([edit]));
+
+		let info = 'SAVE:' + doc.uri.scheme + ':' + eoltxt + ':' + doc.languageId + ':' + doc.version + ':' + doc.lineCount;
+		info = info.toUpperCase() + ': ' + doc.fileName;
+		LOG(info);
+	}));
+
+	//
+
+	LOG('DEVKING.Activate');
 }
 
 deactivate = function () { }

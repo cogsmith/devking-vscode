@@ -39,4 +39,12 @@
 
 ---
 
+# FEATURES
+
+* Commands & Buttons For Quickly Pushing Code
+* IFRAME WebView Wrapper Command
+* Code Tweaks: Force EOL Settings
+
+---
+
 ![SCREENSHOT](SCREENSHOT.PNG)
