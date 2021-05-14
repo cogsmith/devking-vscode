@@ -274,13 +274,13 @@ activate = function (context) {
 
 	context.subscriptions.push(vscode.workspace.onWillSaveTextDocument(e => {
 		let doc = e.document;
-		let eol = doc.eol || vscode.EndOfLine.LF;
+		let eol = vscode.EndOfLine.LF; // let eol = doc.eol || vscode.EndOfLine.LF;
 		let eoltxt = eol == 1 ? 'LF' : 'CRLF';
 
 		const edit = vscode.TextEdit.setEndOfLine(eol);
 		e.waitUntil(Promise.resolve([edit]));
 
-		let info = 'SAVE:' + doc.uri.scheme + ':' + eoltxt + ':' + doc.languageId + ':' + doc.version + ':' + doc.lineCount;
+		let info = 'SAVE:' + doc.uri.scheme + ':' + eoltxt + ':' + doc.lineCount + ':' + doc.languageId;
 		info = info.toUpperCase() + ': ' + doc.fileName;
 		LOG(info);
 	}));
