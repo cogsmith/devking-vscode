@@ -21,7 +21,7 @@ activate = function (context) {
 	//Object.keys(process.env).forEach(z => { console.log(z + '=' + process.env[z]); });
 
 	let devkingpath = 'W:\\DEV\\CODE\\DEVKING-VSCODE';
-	if (fs.existsSync(devkingpath)) { process.cwd(devkingpath); }
+	//if (fs.existsSync(devkingpath)) { process.cwd(devkingpath); }
 
 	let DEVKINGLOGCHAN = vscode.window.createOutputChannel('DEVKING');
 	DEVKINGLOGCHAN.show();
@@ -326,6 +326,22 @@ activate = function (context) {
 			SeenDocs[z.document.uri] = z;
 		}
 	})
+
+	//
+
+	// LOG(process.env);
+
+	LOG('ExtensionPath: ' + context.extensionPath);
+
+	const childProcess = require('child_process');
+	const spawned = childProcess.spawn('CMD', ['/C', 'NODE ' + context.extensionPath + '/backend.js'], { stdio: 'inherit', shell: true, windowsHide: true });
+
+	let cmd = 'ECHO "NODE ' + context.extensionPath + '/backend.js"';
+	//let cmd = '"NODE ' + context.extensionPath + '/backend.js"';
+	//let cmd = 'CMD /C "NODE ' + context.extensionPath + '/backend.js"';
+	//let cmd = 'START /B "NODE ' + context.extensionPath + '/backend.js"';
+	let cmdout = XT.EXECA.commandSync(cmd, { shell: true }).stdout;
+	LOG(cmdout);
 
 	//
 
