@@ -4,7 +4,7 @@
   "description": "👑 VS Code Dev Helpers 👑",
   "icon": "media/logo.png",
   "publisher": "COGSMITH",
-  "version": "0.0.42-dev",
+  "version": "0.0.42",
   "repository": "https://github.com/cogsmith/devking-vscode",
   "engines": {
     "vscode": "^1.32.0"
@@ -117,5 +117,5 @@
   "dependencies": {
     "@cogsmith/xt": "*"
   },
-  "versiontaglast": "0.0.41"
+  "versiontaglast": "0.0.42"
 }
