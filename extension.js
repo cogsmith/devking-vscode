@@ -17,6 +17,7 @@ const DT = function () { return new Date().toISOString().substr(0, 19).replace('
 //
 
 activate = function (context) {
+
 	//Object.keys(process.env).forEach(z => { console.log(z + '=' + process.env[z]); });
 
 	let devkingpath = 'W:\\DEV\\CODE\\DEVKING-VSCODE';
@@ -33,6 +34,8 @@ activate = function (context) {
 	}
 
 	LOG = DEVKINGLOG;
+
+	LOG('DEVKING.Activate');
 
 	//require('http').createServer((req, res) => { res.writeHead(200); res.end('DEVKING-VSCODE' + "\n" + req.url); console.log(req.url); }).listen(31337, '0.0.0.0');
 
@@ -86,10 +89,10 @@ activate = function (context) {
 
 	const GetWorkspaceFolder = function () {
 		let path = false;
-		try { path = vscode.workspace.workspaceFolders[0].uri.path; } catch (ex) { LOG(ex.message); }
+		try { path = vscode.workspace.workspaceFolders[0].uri.path; } catch (ex) { } // LOG(ex.message); }
 		if (path && path.substr(0, 1) == '/') { path = path.substr(1); }
 		//vscode.window.showInformationMessage('WorkspaceFolder: ' + path);
-		LOG('WorkspaceFolder: ' + path);
+		//LOG('WorkspaceFolder: ' + path);
 		return path;
 	}
 
@@ -249,7 +252,7 @@ activate = function (context) {
 			command: { command: 'DEVKING.ITEMCLICK', title: 'CMD_TREEITEM', arguments: [q] },
 		};
 		return treeitem;
-	};
+	}
 
 	TREEDATA_LINKVIEW.getChildren = function (q) {
 		return Object.keys(LINKS);
@@ -270,7 +273,7 @@ activate = function (context) {
 		edit.set(document.uri, res)
 		vscode.workspace.applyEdit(edit);
 		*/
-	});
+	})
 
 	context.subscriptions.push(vscode.workspace.onWillSaveTextDocument(e => {
 		let doc = e.document;
@@ -282,12 +285,53 @@ activate = function (context) {
 
 		let info = 'SAVE:' + doc.uri.scheme + ':' + eoltxt + ':' + doc.lineCount + ':' + doc.languageId;
 		info = info.toUpperCase() + ': ' + doc.fileName;
-		LOG(info);
-	}));
+		//LOG(info);
+	}))
 
 	//
 
-	LOG('DEVKING.Activate');
+	//LOG(context);
+	//if (vscode.workspace.workspaceFolders) { LOG(vscode.workspace.workspaceFolders[0].uri.path); }
+
+	//
+
+	// vscode.workspace.onDidOpenTextDocument((z) => {	});
+
+	SeenDocs = {};
+
+	// vscode.workspace.onDidChangeWorkspaceFolders((z) => { LOG(z) });
+
+	vscode.workspace.onDidCloseTextDocument((z) => {
+		if (z.uri.scheme != 'file') { return; }
+		//LOG('OnDidCloseTextDocument: ' + z.uri);
+		LOG('Close: ' + z.uri);
+		delete SeenDocs[z.uri];
+	});
+
+	vscode.workspace.onDidSaveTextDocument((z) => {
+		//LOG('OnDidSaveTextDocument: ' + z.uri);
+		LOG('Save: ' + z.uri);
+	});
+
+	vscode.workspace.onDidOpenTextDocument((z) => {
+		if (z.uri.scheme != 'file') { return; }
+		//LOG('OnDidOpenTextDocument: ' + z.uri);
+	})
+
+	vscode.window.onDidChangeActiveTextEditor((z) => {
+		if (z.document.uri.scheme != 'file') { return; }
+		if (!SeenDocs[z.document.uri]) {
+			//LOG('OnDidChangeActiveTextEditor: ' + z.document.uri);
+			LOG('Open: ' + z.document.uri);
+			SeenDocs[z.document.uri] = z;
+		}
+	})
+
+	//
+
+	LOG('DEVKING.ActivateDone');
+
+	LOG('Workspace: ' + GetWorkspaceFolder());
 }
 
 deactivate = function () { }
