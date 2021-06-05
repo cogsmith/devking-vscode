@@ -31,7 +31,7 @@
     "keybindings": [
       {
         "command": "DEVKING.PULL",
-        "key": "ctrl+alt+shift+F3"
+        "key": "ctrl+alt+shift+F1"
       },
       {
         "command": "DEVKING.PUSHDEV",
@@ -115,7 +115,8 @@
     "@types/vscode": "^1.32.0"
   },
   "dependencies": {
-    "@cogsmith/xt": "*"
+    "@cogsmith/xt": "^1.0.158",
+    "yargs": "^16.2.0"
   },
   "versiontaglast": "0.0.42"
 }

@@ -3,20 +3,13 @@ const fs = require('fs');
 
 //
 
-const XT = require('@cogsmith/xt').Init();
-const App = XT.App; let LOG = XT.LOG;
-
-LOG.WARN('XT');
-
-App.Webviews = {};
-
 const JSONFANCY = function (x) { return require('util').inspect(x, { colors: false, depth: null, breakLength: 1 }); };
 
 const DT = function () { return new Date().toISOString().substr(0, 19).replace('T', '|'); }
 
 //
 
-activate = function (context) {
+_activate = function (context) {
 
 	//Object.keys(process.env).forEach(z => { console.log(z + '=' + process.env[z]); });
 
@@ -350,6 +343,62 @@ activate = function (context) {
 	LOG('Workspace: ' + GetWorkspaceFolder());
 }
 
-deactivate = function () { }
+//
 
+const XT = require('@cogsmith/xt').Init();
+const App = XT.App; // let LOG = XT.LOG;
+
+//
+
+App.InitLog = function () {
+	let DEVKINGLOGCHAN = vscode.window.createOutputChannel('DEVKING');
+	DEVKINGLOGCHAN.show();
+
+	let DEVKINGLOG = function (msg) {
+		if (typeof (msg) == 'object') { msg = JSONFANCY(msg); }
+		if (!msg) { msg = ""; }
+		msg = '[' + DT() + '] ' + msg;
+		DEVKINGLOGCHAN.appendLine(msg);
+	}
+
+	LOG = DEVKINGLOG;
+}
+
+App.InitBackendExec = function () {
+	const childProcess = require('child_process');
+	const spawned = childProcess.spawn('CMD', ['/C', 'NODEMON --delay 2.5 --ignore package.json --ignore package-lock.json ' + App.Workspace.extensionPath + '/backend.js'], { stdio: 'inherit', shell: true, windowsHide: true });
+}
+
+//
+
+App.Init = function () {
+	App.Webviews = {};
+
+	App.InitLog();
+	LOG('DEVKING.ActivateInit');
+
+	App.InitBackendExec();
+}
+
+//
+
+App.Activate = function (workspace) {
+	App.Workspace = workspace;
+	const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 10);
+	statusBarItem.command = 'DEVKING_INFOVIEW.focus';
+	statusBarItem.text = 'DEVKING';
+	statusBarItem.show();
+	workspace.subscriptions.push(statusBarItem);
+
+	App.Run();
+}
+
+App.Deactivate = function (workspace) {
+
+}
+
+//
+
+const activate = App.Activate;
+const deactivate = App.Deactivate;
 module.exports = { activate, deactivate };
