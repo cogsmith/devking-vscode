@@ -115,7 +115,7 @@
     "@types/vscode": "^1.32.0"
   },
   "dependencies": {
-    "@cogsmith/xt": "^1.0.158",
+    "@cogsmith/xt": "^1.0.160",
     "yargs": "^16.2.0"
   },
   "versiontaglast": "0.0.43"
