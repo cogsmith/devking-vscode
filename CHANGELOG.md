@@ -1,5 +1,18 @@
 <code>
 
+# [0.0.45](https://github.com/cogsmith/devking-vscode/compare/0.0.45...main) @ [2021-07-30](https://github.com/cogsmith/devking-vscode/releases/tag/0.0.45) 
+
+## DIFF
+- [3 COMMITS SINCE LAST TAG = 0.0.44](https://github.com/cogsmith/devking-vscode/compare/0.0.44...0.0.45)
+
+## COMMITS
+- Merge branch 'main' of https://github.com/cogsmith/devking-vscode
+
+</code>
+
+---
+<code>
+
 # [0.0.44](https://github.com/cogsmith/devking-vscode/compare/0.0.44...main) @ [2021-07-30](https://github.com/cogsmith/devking-vscode/releases/tag/0.0.44) 
 
 ## DIFF
