@@ -1,127 +1,127 @@
 {
-    "name": "devking-vscode",
-    "displayName": "DEVKING",
-    "description": "👑 VS Code Dev Helpers 👑",
-    "icon": "media/logo.png",
-    "publisher": "COGSMITH",
-    "version": "0.0.44-dev",
-    "repository": "https://github.com/cogsmith/devking-vscode",
-    "engines": {
-        "vscode": "^1.32.0"
-    },
-    "activationEvents": [
-        "onStartupFinished"
+  "name": "devking-vscode",
+  "displayName": "DEVKING",
+  "description": "👑 VS Code Dev Helpers 👑",
+  "icon": "media/logo.png",
+  "publisher": "COGSMITH",
+  "version": "0.0.45-dev",
+  "repository": "https://github.com/cogsmith/devking-vscode",
+  "engines": {
+    "vscode": "^1.32.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "DEVKING.PULL",
+        "title": "DEVKING.PULL"
+      },
+      {
+        "command": "DEVKING.PUSHDEV",
+        "title": "DEVKING.PUSHDEV"
+      },
+      {
+        "command": "DEVKING.PUSHTAG",
+        "title": "DEVKING.PUSHTAG"
+      },
+      {
+        "command": "DEVKING.IFRAME",
+        "title": "DEVKING.IFRAME"
+      }
     ],
-    "main": "./extension.js",
-    "contributes": {
-        "commands": [
-            {
-                "command": "DEVKING.PULL",
-                "title": "DEVKING.PULL"
-            },
-            {
-                "command": "DEVKING.PUSHDEV",
-                "title": "DEVKING.PUSHDEV"
-            },
-            {
-                "command": "DEVKING.PUSHTAG",
-                "title": "DEVKING.PUSHTAG"
-            },
-            {
-                "command": "DEVKING.IFRAME",
-                "title": "DEVKING.IFRAME"
-            }
-        ],
-        "keybindings": [
-            {
-                "command": "DEVKING.PULL",
-                "key": "ctrl+alt+shift+F1"
-            },
-            {
-                "command": "DEVKING.PUSHDEV",
-                "key": "ctrl+alt+shift+F2"
-            },
-            {
-                "command": "DEVKING.PUSHTAG",
-                "key": "ctrl+alt+shift+F3"
-            }
-        ],
-        "viewsContainers": {
-            "activitybar": [
-                {
-                    "id": "SIDEBAR",
-                    "title": "DEVKING",
-                    "icon": "media/logooutline.png"
-                }
-            ],
-            "panel": [
-                {
-                    "id": "PANEL",
-                    "title": "DEVKING",
-                    "icon": "media/logooutline.png"
-                }
-            ]
+    "keybindings": [
+      {
+        "command": "DEVKING.PULL",
+        "key": "ctrl+alt+shift+F1"
+      },
+      {
+        "command": "DEVKING.PUSHDEV",
+        "key": "ctrl+alt+shift+F2"
+      },
+      {
+        "command": "DEVKING.PUSHTAG",
+        "key": "ctrl+alt+shift+F3"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "SIDEBAR",
+          "title": "DEVKING",
+          "icon": "media/logooutline.png"
+        }
+      ],
+      "panel": [
+        {
+          "id": "PANEL",
+          "title": "DEVKING",
+          "icon": "media/logooutline.png"
+        }
+      ]
+    },
+    "views": {
+      "scm": [
+        {
+          "id": "DEVKING",
+          "name": "DEVKING",
+          "visibility": "visible"
+        }
+      ],
+      "SIDEBAR": [
+        {
+          "id": "DEVKING_INFOVIEW",
+          "name": "INFO",
+          "visibility": "visible"
         },
-        "views": {
-            "scm": [
-                {
-                    "id": "DEVKING",
-                    "name": "DEVKING",
-                    "visibility": "visible"
-                }
-            ],
-            "SIDEBAR": [
-                {
-                    "id": "DEVKING_INFOVIEW",
-                    "name": "INFO",
-                    "visibility": "visible"
-                },
-                {
-                    "id": "DEVKING_LINKVIEW",
-                    "name": "LINKS",
-                    "visibility": "visible"
-                },
-                {
-                    "id": "DEVKING_TREEVIEW",
-                    "name": "DATA",
-                    "visibility": "hidden"
-                }
-            ],
-            "PANEL": [
-                {
-                    "id": "DEVKING_PANELVIEW",
-                    "name": "",
-                    "visibility": "visible"
-                }
-            ]
+        {
+          "id": "DEVKING_LINKVIEW",
+          "name": "LINKS",
+          "visibility": "visible"
         },
-        "viewsWelcome": [
-            {
-                "view": "DEVKING_INFOVIEW",
-                "contents": "[PULL](command:DEVKING.PULL)\n[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n \n"
-            },
-            {
-                "view": "DEVKING",
-                "contents": "[PULL](command:DEVKING.PULL)\n[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n \n"
-            },
-            {
-                "view": "DEVKING_LINKVIEW",
-                "contents": "... PLEASE WAIT EXTENSION LOADING ..."
-            },
-            {
-                "view": "DEVKING_TREEVIEW",
-                "contents": "... PLEASE WAIT EXTENSION LOADING ..."
-            }
-        ]
+        {
+          "id": "DEVKING_TREEVIEW",
+          "name": "DATA",
+          "visibility": "hidden"
+        }
+      ],
+      "PANEL": [
+        {
+          "id": "DEVKING_PANELVIEW",
+          "name": "",
+          "visibility": "visible"
+        }
+      ]
     },
-    "scripts": {},
-    "devDependencies": {
-        "@types/vscode": "^1.32.0"
-    },
-    "dependencies": {
-        "@cogsmith/xt": "^1.0.164",
-        "axios": "^0.21.1",
-        "yargs": "^16.2.0"
-    },
-    "versiontaglast": "0.0.43"
+    "viewsWelcome": [
+      {
+        "view": "DEVKING_INFOVIEW",
+        "contents": "[PULL](command:DEVKING.PULL)\n[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n \n"
+      },
+      {
+        "view": "DEVKING",
+        "contents": "[PULL](command:DEVKING.PULL)\n[PUSH DEV](command:DEVKING.PUSHDEV)\n[PUSH TAG](command:DEVKING.PUSHTAG)\n \n"
+      },
+      {
+        "view": "DEVKING_LINKVIEW",
+        "contents": "... PLEASE WAIT EXTENSION LOADING ..."
+      },
+      {
+        "view": "DEVKING_TREEVIEW",
+        "contents": "... PLEASE WAIT EXTENSION LOADING ..."
+      }
+    ]
+  },
+  "scripts": {},
+  "devDependencies": {
+    "@types/vscode": "^1.32.0"
+  },
+  "dependencies": {
+    "@cogsmith/xt": "^1.0.164",
+    "axios": "^0.21.1",
+    "yargs": "^16.2.0"
+  },
+  "versiontaglast": "0.0.44"
 }
