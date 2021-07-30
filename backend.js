@@ -25,17 +25,20 @@ App.Main = function () {
 }
 
 App.Routes = { ELSEROOT: true };
-App.Routes['/foo'] = (req, rep) => { rep.send('FOO'); };
+App.Routes['/'] = (req, rep) => { rep.send('DEVKING999'); };
 
-App.Routes = {
-    '/foo': (req, rep) => {
-        let data = { action: 'FOO', rand: Math.random() };
-        rep.view('template', data);
-    }
-}
+App.Routes['/foo'] = (req, rep) => {
+    let data = { action: 'FOO', rand: Math.random() };
+    rep.view('template', data);
+};
 
 App.Routes['/uptime'] = (req, rep) => { rep.send(Math.floor(process.uptime())); };
 
+App.Routes['/event'] = (req, rep) => {
+    rep.send(req.query);
+};
+
+App.Routes['/test2'] = (req, rep) => { rep.send(req.query); };
 
 App.Port = 31337;
 App.Run();
