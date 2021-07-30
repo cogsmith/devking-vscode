@@ -25,7 +25,7 @@ App.Main = function () {
 }
 
 App.Routes = { ELSEROOT: true };
-App.Routes['/'] = (req, rep) => { rep.send('DEVKING999'); };
+App.Routes['/'] = (req, rep) => { rep.send('DEVKING'); };
 
 App.Routes['/foo'] = (req, rep) => {
     let data = { action: 'FOO', rand: Math.random() };
