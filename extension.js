@@ -6,7 +6,6 @@ const vscode = require('vscode');
 //
 
 const JSONFANCY = function (x) { return require('util').inspect(x, { colors: false, depth: null, breakLength: 1 }); };
-
 const DT = function () { return new Date().toISOString().substr(0, 19).replace('T', '|'); }
 
 //
