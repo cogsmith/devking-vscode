@@ -59,8 +59,7 @@ App.Init = function () {
 
     App.InitBackendExec();
 
-
-
+    let context = App.Workspace;
 
     const CMD_IFRAME = vscode.commands.registerCommand('DEVKING.IFRAME', async (url, title) => {
         LOG('IFRAME: ' + url);
