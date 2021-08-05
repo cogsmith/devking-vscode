@@ -35,7 +35,7 @@ App.InitBackendExec = async function () {
 
 App.InitLog = function () {
     let LOGCHANNEL = vscode.window.createOutputChannel('DEVKING');
-    LOGCHANNEL.show();
+    //LOGCHANNEL.show();
 
     let DEVKINGLOG = function (msg) {
         if (typeof (msg) == 'object') { msg = JSONFANCY(msg); }
