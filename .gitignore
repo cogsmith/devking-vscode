@@ -1,3 +1,4 @@
+.gitskip
 .env
 .env.*
 node_modules/

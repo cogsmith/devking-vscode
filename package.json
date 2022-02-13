@@ -4,7 +4,7 @@
   "description": "👑 VS Code Dev Helpers 👑",
   "icon": "media/logo.png",
   "publisher": "COGSMITH",
-  "version": "0.0.48-dev",
+  "version": "1.0.1-dev",
   "repository": "https://github.com/cogsmith/devking-vscode",
   "engines": {
     "vscode": "^1.32.0"
@@ -12,7 +12,7 @@
   "activationEvents": [
     "onStartupFinished"
   ],
-  "main": "./extension.js",
+  "main": "./addon.js",
   "contributes": {
     "commands": [
       {
@@ -80,11 +80,6 @@
           "id": "DEVKING_LINKVIEW",
           "name": "LINKS",
           "visibility": "visible"
-        },
-        {
-          "id": "DEVKING_TREEVIEW",
-          "name": "DATA",
-          "visibility": "hidden"
         }
       ],
       "PANEL": [
@@ -106,11 +101,7 @@
       },
       {
         "view": "DEVKING_LINKVIEW",
-        "contents": "... PLEASE WAIT EXTENSION LOADING ..."
-      },
-      {
-        "view": "DEVKING_TREEVIEW",
-        "contents": "... PLEASE WAIT EXTENSION LOADING ..."
+        "contents": "... PLEASE WAIT LOADING ..."
       }
     ]
   },
@@ -119,9 +110,7 @@
     "@types/vscode": "^1.32.0"
   },
   "dependencies": {
-    "@cogsmith/xt": "^1.0.164",
-    "axios": "^0.21.1",
-    "yargs": "^16.2.0"
+    "ws": "^8.4.2"
   },
   "versiontaglast": "0.0.47"
 }
