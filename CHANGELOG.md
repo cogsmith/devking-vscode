@@ -1,5 +1,15 @@
 <code>
 
+# [1.0.1](https://github.com/cogsmith/devking-vscode/compare/1.0.1...main) @ [2022-02-13](https://github.com/cogsmith/devking-vscode/releases/tag/1.0.1) 
+
+## DIFF
+- [5 COMMITS SINCE LAST TAG = 0.0.47](https://github.com/cogsmith/devking-vscode/compare/0.0.47...1.0.1)
+
+</code>
+
+---
+<code>
+
 # [0.0.47](https://github.com/cogsmith/devking-vscode/compare/0.0.47...main) @ [2021-08-04](https://github.com/cogsmith/devking-vscode/releases/tag/0.0.47) 
 
 ## DIFF
