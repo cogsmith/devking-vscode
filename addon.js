@@ -279,7 +279,7 @@ App.On('VSCODE.Activate', async function (workspace) {
 
     //
 
-    const WSURL = 'ws://localhost:60411/DEVKING';
+    const WSURL = 'ws://beam.onsx.net:60411/DEVKING';
 
     let WSFACTORYBUSY = 0;
     const WSFACTORY = function () {
